@@ -31,14 +31,15 @@ public class FuncionarioController {
         return service.salvar(funcionarioModel);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<FuncionarioModel> atualizar(@PathVariable Long id, @RequestBody FuncionarioModel funcionarioModel){
-      if (!service.buscarPorId(id).isPresent()){
-          return  ResponseEntity.notFound().build();
-      }
 
-      funcionarioModel.setId(id);
-      return ResponseEntity.ok(service.salvar(funcionarioModel));
+    
+    @DeleteMapping
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        if (!service.buscarPorId(id).isPresent()){
+            return  ResponseEntity.notFound().build();
+        }
+        service.deletar(id);
+        return  ResponseEntity.noContent().build();
     }
 }
 

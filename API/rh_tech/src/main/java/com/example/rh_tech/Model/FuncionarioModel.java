@@ -44,4 +44,6 @@ public class FuncionarioModel {
 
     @Column(nullable = false)
     private  String estado;
+
+
 }

@@ -24,7 +24,14 @@ public class CargosService {
     public CargosModel salvar(CargosModel cargosModal){
         return  repository.save(cargosModal);
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<CargosModel> atualizar(@PathVariable Long id, @RequestBody FuncionarioModel funcionarioModel){
+        if(buscarPorId(id).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        funcionarioModel.setId(id);
+        return ResponseEntity.ok(salvar(funcionarioModel));
+    }
     public  void deletar(Long id){
         repository.deleteById(id);
     }
